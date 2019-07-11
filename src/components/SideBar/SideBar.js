@@ -13,13 +13,25 @@ import {
   Thumbnail,
   Left,
   Right,
-  Body
+  Body,
+  FooterTab,
+  Footer,
+  Button
 } from "native-base";
 import {Switch} from 'react-native-base-switch';
 import Star from 'react-native-star-view';
+import { material } from "react-native-typography";
 
-const routes = ["Home", "Wallet", "Booking History" ,"Payments","Your Rating", 
-"Referral Code", "Settings", "Share App","About AWA Delivery"];
+const routes = [{data:"Home",nav:"Home"},
+              {data:"Wallet",nav:'Wallet'},
+              {data:"Booking History",nav:'BookingHistory'},
+              {data:"Payments",nav:'Payment'},
+              {data:"Your Rating",nav:'YourRating'}, 
+              {data:"Referral Code",nav:'ReferralCode'},
+              {data:"Settings",nav:'Settings'}, 
+              {data:"Share App",nav:'ShareApp'},
+              {data:"About AWA Delivery",nav:'About'}];
+
  class SideBar extends React.Component {
 
 setCurrentRoute=(nav)=>{
@@ -47,7 +59,9 @@ setCurrentRoute=(nav)=>{
               
                </Body>
                <Right style={{textAlign:'center'}}>
-                  <Switch onChangeState={()=>this.props.navigation.navigate('Login')}
+                  <Switch onChangeState={()=>{this.props.navigation.navigate('Login')
+                  this.setCurrentRoute('Home')
+                }}
                   activeBackgroundColor='#339966a6'
                   inactiveBackgroundColor='#33996648'
                   activeButtonColor='#339966'
@@ -67,33 +81,39 @@ setCurrentRoute=(nav)=>{
                   noIndent
                   button
                   onPress={() =>{ 
+                    this.props.navigation.navigate(data.nav);
                     this.props.navigation.closeDrawer();
-                    this.setCurrentRoute(data)
+                    this.setCurrentRoute(data.data)
                     }
                   }
-                  key={data+1}
+                  key={data.data+1}
                   style={{borderBottomColor:'transparent',fontFamily:'Roboto',
-                  backgroundColor:this.props.route.route==data? '#339966' : '#F8F8F8',         height:50,
-                  borderEndColor:this.props.route.route==data? '#FFCE00' : 'transparent',
-                  borderRightWidth:this.props.route.route==data? 5 : 0,
+                  backgroundColor:this.props.route.route==data.data? '#339966' : '#F8F8F8',         height:50,
+                  borderEndColor:this.props.route.route==data.data? '#FFCE00' : 'transparent',
+                  borderRightWidth:this.props.route.route==data.data? 5 : 0,
                  
                 }}
                 >
                   <Text
-                   style={{...styles.text ,color:this.props.route.route==data? '#fff' : 'rgba(0,0,0,0.7)'}}
-                  >{data}</Text>
+                   style={{...styles.text ,color:this.props.route.route==data.data? '#fff' : 'rgba(0,0,0,0.7)'}}
+                  >{data.data}</Text>
                 </ListItem>
               );
             })
           }
           </List>
           </View>
-          <View style={styles.footView}>
-              <Text
-              style={{fontWeight:'100', ...styles.text}}
-              >AWA Delivery</Text>
-          </View>
+          
         </Content>
+        <Footer style={{backgroundColor:'#ffffff'}}>
+          <FooterTab style={{backgroundColor:'#ffffff'}}>
+             <Button full transparent>
+             <Text
+              style={material.body1}
+              >AWA Delivery</Text>
+             </Button>
+          </FooterTab>   
+          </Footer>
       </Container>
     );
   }

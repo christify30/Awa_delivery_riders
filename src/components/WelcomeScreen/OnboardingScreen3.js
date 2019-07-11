@@ -31,9 +31,9 @@ const {height} =Dimensions.get('window');
                                <Text 
                                style={{
                                    textAlign:'center',
-                                   ...material.body1,
+                                   ...material.caption,
                                    }}>
-                                    It is AWA collective responsiblity that you meet your financial goals. Join a community that allows you.
+                                    It is AWA collective responsiblity that you {'\n'} meet your financial goals. Join a {'\n'} community that allows you.
                                 </Text>
                            </Row> 
                          </Grid>

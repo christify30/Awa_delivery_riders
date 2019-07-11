@@ -22,7 +22,7 @@ import {human } from 'react-native-typography';
             name: 'One',
             image:'asset:/image/welcome.PNG',
             buttonText:'Next',
-            progress:0.4,
+            progress:1,
             buttonColor:'#AAAAAA',
             nextForm:'Signup3'
           }

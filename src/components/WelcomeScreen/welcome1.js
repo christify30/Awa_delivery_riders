@@ -5,7 +5,7 @@ import WelcomeContainer from './welcome12Container';
 const attribute={
     image:'asset:/image/welcomei.PNG',
     headline:'AWA RIDER',
-    story:'Welcome, with AWA delivery make easy and quick deiveries any day any time.'
+    story:'Welcome, make easy and quick deiveries \n any  time any day.'
 }
 export default class welcome1 extends Component {
     static navigationOptions = ({ navigation }) => ({

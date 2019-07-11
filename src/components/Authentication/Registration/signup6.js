@@ -20,7 +20,7 @@ import {human, material } from 'react-native-typography';
             name: 'One',
             image:'asset:/image/welcome.PNG',
             buttonText:'Accept',
-            progress:0.9,
+            progress:5,
             buttonColor:'#339966',
             nextForm:'Signup7'
           }

@@ -2,15 +2,16 @@ import React from 'react';
 import {View,StyleSheet,Text,Image} from 'react-native';
 import {Button} from 'native-base';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import {material} from 'react-native-typography'
+import {material} from 'react-native-typography';
+import {heightPercentageToDP} from '../../PixelRatio/pixelRatio'
 
  const welcome12Container=(props)=>{
 
     return (
         <View style={{flex:1,flexDirection:'column'}}>
-            <View style={{flex:6}}>
+            <View style={{flex:5}}>
                  <Image
-                     style={{width: '100%',height:'100%'}}
+                     style={{width: '100%',height:heightPercentageToDP('53%')}}
                      source={{uri:props.image}}
                 />
                 <Button style={styles.yellowSkip} >
@@ -20,13 +21,13 @@ import {material} from 'react-native-typography'
                 </Button>
                
             </View>
-            <View style={{flex:1,justifyContent:'center',alignItems:'center',padding:50}}>
+            <View style={{flex:1.5,justifyContent:'flex-end',alignItems:'center',padding:50,marginTop:10,backgroundColor:'transparent'}}>
                 <Text style={{...material.headline,color:'#339966'}}>{props.headline}</Text>
                 <Text style={{...material.caption,textAlign:'center'}}>
                 {props.story}
                 </Text>
             </View>
-            <View style={{flex:3, flexDirection:'row',alignItems:'flex-end'}}>
+            <View style={{flex:2.5, flexDirection:'row',alignItems:'flex-end'}}>
                      <View style={{flex:1}}>
                         <TouchableOpacity onPress={props.onPress} full style={styles.swiptButton}>
                          <Text style={{ transform: [{ rotate: '-90deg' }] }}>Swipe Up</Text>
@@ -39,7 +40,7 @@ import {material} from 'react-native-typography'
 }
 const styles=StyleSheet.create({
     yellowSkip:{
-        borderBottomLeftRadius:80,
+        borderBottomLeftRadius:100,
         position:'absolute',
         top:0,
         right:0,
@@ -51,15 +52,11 @@ const styles=StyleSheet.create({
     },
     swiptButton:{
       backgroundColor:'#F8F8F8',
-      height:160,
+      height:heightPercentageToDP('25%'),
       justifyContent:'center',
       alignItems:'center',
-      borderTopStartRadius:250,
-      borderTopEndRadius:250
-    },
-    te:{
-      
-        
+      borderTopStartRadius:450,
+      borderTopEndRadius:450
     }
 })
 export default welcome12Container;

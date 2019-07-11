@@ -9,6 +9,7 @@ import {StyleSheet,Text} from 'react-native'
 const header=({props,title})=> {
     return (
         <Header
+        hasTabs={props.hasTabs}
         style={{backgroundColor:'#F8F8F8'}}  androidStatusBarColor="#339966">
             <Left>
                 <TouchableOpacity

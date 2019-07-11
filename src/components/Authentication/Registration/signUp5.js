@@ -17,12 +17,12 @@ import { human } from 'react-native-typography';
       });
      render(){
         const item={
-            header: 'Personal Detail',
-            subHead:'We’ll only display your name and Driver photo',
+            header: 'Payment Details',
+            subHead:'We need this information to pay you',
             name: 'One',
             image:'asset:/image/welcome.PNG',
             buttonText:'Next',
-            progress:0.7,
+            progress:4,
             buttonColor:'#AAAAAA',
             nextForm:'Signup6'
           }

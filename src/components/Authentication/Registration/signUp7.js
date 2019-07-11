@@ -3,6 +3,7 @@ import {Header,Form,Item,Input} from 'native-base';
 import Wrapper from './Wrapper';
 import {View,Text} from 'react-native'
 import RegisterTheme from './index';
+import { heightPercentageToDP } from '../../../PixelRatio/pixelRatio';
 
 
 
@@ -20,14 +21,14 @@ import RegisterTheme from './index';
             name: 'One',
             image:'asset:/image/welcome.PNG',
             buttonText:'Finish',
-            progress:1,
+            progress:6,
             buttonColor:'#339966',
             nextForm:'HomeIndex'
           }
         return (
             <RegisterTheme parentProperty={this.props} nextPage={item}>
                 <Wrapper>
-                  <View style={{flex:1,height:300,alignItems:'center' ,justifyContent:'center'}}>
+                  <View style={{flex:1,height:heightPercentageToDP('40%'),alignItems:'center' ,justifyContent:'center'}}>
                     <View >
                        <Text>Promo code</Text>
                     </View>

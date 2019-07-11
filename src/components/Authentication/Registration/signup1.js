@@ -21,7 +21,7 @@ import {human,material} from 'react-native-typography'
             name: 'One',
             image:'asset:/image/welcome.PNG',
             buttonText:'Continue',
-            progress:0.2,
+            progress:0,
             buttonColor:'#AAAAAA',
             nextForm:'Signup2'
           }

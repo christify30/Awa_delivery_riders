@@ -2,13 +2,14 @@ import React, {Component} from "react";
 import Header from '../../container/header/Header'
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types'
-import { Container,Text,Content,Card,CardItem,Grid,Row,Thumbnail,Button, Col, Item, Input} from "native-base";
+import { Container,Text,Content,Card,CardItem,Grid,Thumbnail, Col, Item, Input} from "native-base";
 import Footer  from '../../container/footer/Footer';
-import {View,StyleSheet,TouchableOpacity,Dimensions} from 'react-native';
-import {material,human} from 'react-native-typography'
+import {View,StyleSheet,Image} from 'react-native';
+import {material,human} from 'react-native-typography';
+import {currentRoute} from '../../redux/actions/routesAction'
 import Star from 'react-native-star-view';
+import {heightPercentageToDP,widthPercentageToDP} from '../../PixelRatio/pixelRatio'
 
-const {height}= Dimensions.get('window');
 class HomeScreenIndex extends Component {
   static navigationOptions = ({ navigation }) => ({
     drawerLockMode :'unlocked'
@@ -18,10 +19,10 @@ class HomeScreenIndex extends Component {
   }
 
    componentDidMount(){
-    //this.props.getCurrentPosition();
+    this.props.currentRoute('Home');
    }
   componentWillReceiveProps(nextProps){
-    
+   
   }
   render() {
     return (
@@ -29,15 +30,16 @@ class HomeScreenIndex extends Component {
         <Header props={this.props} title='Welcome Josh Alim'/>
           <Content>
               <Card transparent>
-                <CardItem style={{backgroundColor:'#F8F8F8',height:height-200}}>
+                <CardItem style={{backgroundColor:'#F8F8F8',height:heightPercentageToDP('90%')}}>
                     <View style={{flex:1,flexDirection:'column'}}>
-                      <View style={{flex:0.8,alignItems:'center'}}>
-                        <Text style={{...human.title3,color:'rgba(0,0,0,0.5)'}}>Let's Make Some Extra Cash</Text>
+                      <View style={{flex:0.4,alignItems:'center'}}>
+                        <Text style={{...human.title3,color:'rgba(0,0,0,0.5)'}}>Let's Make Some</Text>
+                        <Text style={{...human.title3,color:'rgba(0,0,0,0.5)'}}>Extra Cash</Text>
                       </View>
-                      <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-                        <Thumbnail style={{width:120,height:120,borderRadius:60}} large source={{uri:'asset:/image/motorcycle.PNG'}} />
+                      <View style={{flex:0.6,justifyContent:'center',alignItems:'center'}}>
+                        <Image style={{width:widthPercentageToDP('30%'),height:heightPercentageToDP('17%'),borderRadius:heightPercentageToDP('80%')}} source={{uri:'asset:/image/cycle1.PNG'}} />
                       </View>
-                      <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+                      <View style={{flex:0.6,justifyContent:'center',alignItems:'center'}}>
                         <Text style={{color:'rgba(0,0,0,0.6)'}}>Motorcycle</Text>
                         <Text style={material.caption}>This text field is the selected ride description</Text>
                         <Text style={{...material.caption,color:'#339966'}}>Max weight: 5kg | Max height: 21” X 14”</Text>
@@ -45,7 +47,7 @@ class HomeScreenIndex extends Component {
                       <View style={{flex:1}}>
                           <Card transparent>
                             <CardItem style={{backgroundColor:'transparent'}}>
-                              <Grid style={{height:220}}>
+                              <Grid style={{height:heightPercentageToDP('20%')}}>
                                 <Col size={100} style={{backgroundColor:'#339966'}}>
                                    <View style={{flex:1, flexDirection:'column',alignItems:'center'}}>
                                      <Thumbnail style={{width:60, height:60,margin:5}} source={{uri:'https://s.gravatar.com/avatar/6ce574b021fa96559bf2b1a4ed3e5d3b?s=80'}}/>
@@ -54,11 +56,13 @@ class HomeScreenIndex extends Component {
                                    </View>
                                 </Col>
                                 <Col size={150} style={{backgroundColor:'#ffffff',}} >
-                                   <View style={{flex:1, flexDirection:'column',padding:10}}>
+                                   <View style={{flex:0.5, flexDirection:'column',padding:10}}>
                                      <Text style={{color:'rgba(0,0,0,0.6)',margin:3,}}>Set a goal today</Text>
                                      <Text style={{...material.caption}}>Make sure you set realistic and attainable goals</Text>
-                                     <Item>
-                                       <Input/>
+                                     </View>
+                                     <View style={{flex:1}}>
+                                     <Item >
+                                       <Input  placeholder='15,000'/>
                                      </Item>
                                    </View>
                                 </Col>
@@ -85,5 +89,7 @@ HomeScreenIndex.propType={
 const MapStateToProps=(state)=>({
   
 })
-
-export default connect(MapStateToProps,{})(HomeScreenIndex)
+HomeScreenIndex.propTypes={
+  currentRoute:PropTypes.func.isRequired
+}
+export default connect(MapStateToProps,{currentRoute})(HomeScreenIndex)

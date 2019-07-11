@@ -19,9 +19,9 @@ import {human,material } from 'react-native-typography';
             name: 'One',
             image:'asset:/image/welcome.PNG',
             buttonText:'Next',
-            progress:0.5,
+            progress:2,
             buttonColor:'#AAAAAA',
-            nextForm:'Signup5'
+            nextForm:'Signup4'
           }
         return (
             <RegisterTheme parentProperty={this.props} nextPage={item}>

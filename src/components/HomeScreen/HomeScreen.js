@@ -9,7 +9,7 @@ import {getName} from '../../redux/actions/homeAction';
 import Mapcontainer from '../../Map/Map';
 import {getCurrentPosition} from '../../redux/actions/homeAction';
 import {Dimensions,AppRegistry} from 'react-native';
-
+import {currentRoute} from '../../redux/actions/routesAction';
 
 const {width,height} = Dimensions.get("window");
 const ASPECT_RATION = width / height;
@@ -34,6 +34,7 @@ class HomeScreen extends Component {
       }
    }
    componentDidMount(){
+    this.props.currentRoute('Home')
     this.props.getCurrentPosition();
    }
   componentWillReceiveProps(nextProps){
@@ -71,7 +72,8 @@ class HomeScreen extends Component {
 HomeScreen.propType={
   home:PropTypes.object.isRequired,
   region:PropTypes.object.isRequired,
-  getCurrentPosition:PropTypes.func.isRequired
+  getCurrentPosition:PropTypes.func.isRequired,
+  currentRoute:PropTypes.func.isRequired
 }
 
 const MapStateToProps=(state)=>({
@@ -79,4 +81,4 @@ const MapStateToProps=(state)=>({
   region:state.home
 })
 
-export default connect(MapStateToProps,{getName,getCurrentPosition})(HomeScreen)
+export default connect(MapStateToProps,{getName,getCurrentPosition,currentRoute})(HomeScreen)
