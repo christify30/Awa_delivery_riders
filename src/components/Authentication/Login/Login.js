@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
-import {Text,Container,Content,Right, Header,Button,Input, Form,Icon,Item,Grid,Body, Row, Left} from 'native-base';
+import {Text,Container, Header,Button,Input, Form,Icon,Item,Grid, Row} from 'native-base';
 import {View,TouchableOpacity,StyleSheet, Dimensions} from 'react-native';
-import {test} from '../../../redux/actions/homeAction';
+//import {test} from '../../../redux/actions/homeAction';
 import {connect} from 'react-redux';
-import {material} from 'react-native-typography'
+import {material} from 'react-native-typography';
+import {login} from '../../../redux/actions/Authentication/auth';
+import Wrapper from '../../Wrapper';
+import Spinner from '../../Spinner';
+import Empty from '../../Empty';
+import route from './routeTohit';
+
+import PropTypes from 'prop-types';
 
 const {height} = Dimensions.get('window');
 
+let error = false;
+let registeringText = 'Signing you in...'
  class Login extends Component {
 
   static navigationOptions = ({ navigation }) => ({
@@ -16,11 +25,88 @@ const {height} = Dimensions.get('window');
         )
       });
 
+      state={
+        email:'',
+        password:'',
+        serverErrors:{status:false,message:''},
+        loading:false,
+            emailError:{
+                status:false,
+                message:''
+            },
+            passwordError:{
+                status:false,
+                message:''
+            
+        },
+        error:false
+      }
+
      componentWillMount(){
-         this.props.test;
+         
      }
+
+     componentWillReceiveProps(nextProps){
+//this.props.navigation.navigate('HomeIndex')
+           // console.log(nextProps);
+            const {error,user,User} = nextProps.data.auth;
+            console.log('i am user ', user, 'i am error', error)
+            if(user){
+           
+            setTimeout(()=>{
+               route(this.props.navigation,User)
+                //this.props.navigation.navigate('HomeIndex');
+            this.setState({loading:false,serverErrors:{status:false,message:''}})
+            },4000)
+            }else{
+                this.setState({loading:false,serverErrors:{status:true,message:error}});
+               
+            }
+         
+     }
+
+     validateInput=()=>{
+        const emailPattern= "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+        const passwordPattern= ".{1,}"
+        error=false;
+
+        if(!this.state.email.match(emailPattern)){
+         error=true;   
+         this.setState({
+           emailError:{status:true,message:'Please Enter a valid Email',error:true}
+        })
+     }
+
+
+   if(!this.state.password.match(passwordPattern)){
+      
+     error=true;     
+     this.setState({
+     passwordError:{status:true,message:'Please Enter Your Password',error:true}
+  })
+ }
+}// ends validate Input
+
+
+     handleClick=()=>{
+        this.validateInput();
+        console.log(error);
+        if(!error){
+            const data={
+                email:this.state.email,
+                password:this.state.password
+            }
+          this.setState({loading:true})
+          this.props.login(data);
+        }
+        return
+    }
+
+
     render() {
+        const {emailError,passwordError} =  this.state; 
         return (
+           <Wrapper>
             <Container>
                 <View style={{flex:0.1,justifyContent:'center'}}>
                     <TouchableOpacity onPress={() =>this.props.navigation.goBack()} style={styles.backButton}>
@@ -42,19 +128,30 @@ const {height} = Dimensions.get('window');
                 <View style={{flex:1.3}}>
                 <Grid>  
                   <Row style={{justifyContent:'center',alignItems:'center'}}>
+
                        <Form style={{...styles.formView}}>
-                            <Item
-                               style={{marginBottom:30}}
-                            >
+                            <Item error={emailError.status}>
                                 <Icon style={material.body1} active name='person' />
-                                <Input style={material.body1} placeholder='Email'/>
+                                <Input
+                                onFocus={()=>this.setState({emailError:{status:false,message:''}})}
+                                onChangeText={(text)=>this.setState({email:text})} style={material.body1} placeholder='Email'/>
                             </Item>
-                            <Item  style={{marginBottom:30}}>
+                            {emailError.status ? <Text  style={styles.errorText}>{emailError.message}</Text>:<Text></Text>}
+                            <Item error={passwordError.status} style={{marginTop:30}}>
                                 <Icon style={material.body1} active name='lock' />
-                                <Input style={material.body1} placeholder='Password'/>
+                                <Input 
+                                onFocus={()=>this.setState({passwordError:{status:false,message:''}})}
+                                 secureTextEntry={true}
+                                 onChangeText={(text)=>this.setState({password:text})} style={material.body1} placeholder='Password'/>
                             </Item>
+                            {passwordError.status ? <Text style={styles.errorText}>{passwordError.message}</Text>:<Empty/>}
+
+                            {this.state.serverErrors.status ?
+                                <Text style={{color:'red'}}>{this.state.serverErrors.message}</Text>
+                                  :<Empty/>}
                              <Button 
-                                    onPress={()=>this.props.navigation.navigate('HomeIndex')}style={{...styles.buttons,backgroundColor:'#339966'}}>
+                                    onPress={this.handleClick} 
+                                    style={{...styles.buttons,backgroundColor:'#339966',marginTop:30}}>
                                         <Text>LOGIN</Text>
                              </Button>
                              <TouchableOpacity onPress={()=>this.props.navigation.navigate('Register')} style={{marginTop:10}}> 
@@ -62,13 +159,15 @@ const {height} = Dimensions.get('window');
                                     alignSelf:'center'}}>
                                  Dont have an account?<Text style={{color:'#339966'}}> Sign Up</Text>
                                 </Text>
-                            </TouchableOpacity>
-                           
+                            </TouchableOpacity>   
                        </Form>
+
                      </Row>
                   </Grid>
                 </View>
             </Container>
+            {this.state.loading?<Spinner text={registeringText}/>:<Empty/>}
+         </Wrapper>
         )
     }
  }
@@ -97,9 +196,22 @@ const styles=StyleSheet.create({
         height:60,
         alignSelf:'center',
         justifyContent:'center'
+    },
+    errorText:{
+        ...material.caption,
+        color:'red',
+        marginLeft:20,
+        marginTop:10
     }
 });
-const mapStateToProps=(state)=>({
 
+Login.propTypes={
+login:PropTypes.func.isRequired,
+data:PropTypes.object.isRequired,
+}
+
+const mapStateToProps=(state)=>({
+data:state
 })
-export default connect(mapStateToProps,{test})(Login)
+
+export default connect(mapStateToProps,{login})(Login);

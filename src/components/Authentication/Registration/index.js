@@ -55,7 +55,10 @@ import {heightPercentageToDP} from '../../../PixelRatio/pixelRatio';
                         {this.props.children}
                    
                     <CardItem style={{justifyContent:'center',borderBottomLeftRadius:10,borderBottomRightRadius:10}}>
-                           <Button style={{...styles.regButton,backgroundColor:item.buttonColor}} onPress={()=>props.parentProperty.navigation.navigate(item.nextForm)}>
+                    <Button style={{...styles.regButton,backgroundColor:item.buttonColor}}
+                    //onPress={()=>props.parentProperty.navigation.navigate(item.nextForm)}
+                    onPress={props.handleClick}
+                     >
                             <Text>{item.buttonText}</Text>
                            </Button>
                     </CardItem> 

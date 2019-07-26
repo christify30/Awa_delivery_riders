@@ -3,6 +3,8 @@ package com.awa_delivery_riders;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.react.rnspinkit.RNSpinkitPackage;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -26,9 +28,12 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(new MainReactPackage(),
-            new MapsPackage(),
-            new SplashScreenReactPackage(), new RNGestureHandlerPackage(),
-          new VectorIconsPackage());
+            new RNSpinkitPackage(),
+            new AsyncStoragePackage(),
+           new MapsPackage(),
+           new SplashScreenReactPackage(),
+           new RNGestureHandlerPackage(),
+           new VectorIconsPackage());
     }
 
     @Override
