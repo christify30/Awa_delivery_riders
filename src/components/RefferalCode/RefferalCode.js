@@ -4,17 +4,15 @@ import {Container,Content, Left, Body, Right, CardItem, Card, Button} from 'nati
 import Header from '../../container/header/Header';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {currentRoute} from '../../redux/actions/routesAction';
+//import {currentRoute} from '../../redux/actions/routesAction';
 import {heightPercentageToDP,widthPercentageToDP} from '../../PixelRatio/pixelRatio';
 import {material} from 'react-native-typography';
 
 class ReferralCode extends Component {
-    static navigationOptions = ({ navigation }) => ({
-        drawerLockMode :'unlocked'
-      });
+   
     
       componentDidMount() {
-          this.props.currentRoute('Referral Code')
+         // this.props.currentRoute('Referral Code')
       }
     render() {
         return (
@@ -50,6 +48,6 @@ const mapStateToProps=(state)=>({
 
 });
 ReferralCode.propTypes={
-    currentRoute:PropTypes.func.isRequired
+    //currentRoute:PropTypes.func.isRequired
 }
-export default connect(mapStateToProps,{currentRoute})(ReferralCode)
+export default connect(mapStateToProps,{})(ReferralCode)

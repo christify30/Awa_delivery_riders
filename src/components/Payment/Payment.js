@@ -4,19 +4,17 @@ import {Container,Content,List,ListItem, Card, Body, Right, Footer, FooterTab, B
 import Header from '../../container/header/Header';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {currentRoute} from '../../redux/actions/routesAction';
+//import {currentRoute} from '../../redux/actions/routesAction';
 import {PaymentCard} from '../commonComponents/CommonCards';
 import {material} from 'react-native-typography';
 import {widthPercentageToDP, heightPercentageToDP} from '../../PixelRatio/pixelRatio';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class Payment extends Component {
-    static navigationOptions = ({ navigation }) => ({
-        drawerLockMode :'unlocked'
-      });
+   
     
       componentDidMount() {
-          this.props.currentRoute('Payments')
+         // this.props.currentRoute('Payments')
       }
     render() {
         return (
@@ -63,6 +61,6 @@ const mapStateToProps=(state)=>({
 
 });
 Payment.propTypes={
-    currentRoute:PropTypes.func.isRequired
+    //currentRoute:PropTypes.func.isRequired
 }
-export default connect(mapStateToProps,{currentRoute})(Payment)
+export default connect(mapStateToProps,{})(Payment)

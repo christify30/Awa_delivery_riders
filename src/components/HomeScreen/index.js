@@ -6,28 +6,38 @@ import { Container,Text,Content,Card,CardItem,Grid,Thumbnail, Col, Item, Input} 
 import Footer  from '../../container/footer/Footer';
 import {View,StyleSheet,Image} from 'react-native';
 import {material,human} from 'react-native-typography';
-import {currentRoute} from '../../redux/actions/routesAction'
+//import {currentRoute} from '../../redux/actions/routesAction'
+//import {getProfile} from '../../redux/actions/Authentication/auth'
 import Star from 'react-native-star-view';
 import {heightPercentageToDP,widthPercentageToDP} from '../../PixelRatio/pixelRatio'
 
 class HomeScreenIndex extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    drawerLockMode :'unlocked'
-  })
-  constructor(){
-    super();
+   
+  state={
+    name:'loading...',
+    goal:''
   }
 
    componentDidMount(){
-    this.props.currentRoute('Home');
+   // this.props.getProfile();
+   const {firstname,lastname}=this.props.data.profile.data;
+   // const {firstname,lastname}=this.props.data.profile.data;
+    this.setState((state)=>{
+      return {name:`${firstname} ${lastname}`}
+    })
+    
    }
+
   componentWillReceiveProps(nextProps){
-   
+   console.log(nextProps);
+    //this.props.currentRoute('Home');
+  
   }
+
   render() {
     return (
       <Container style={{backgroundColor:'#F8F8F8'}}>
-        <Header props={this.props} title='Welcome Josh Alim'/>
+        <Header props={this.props} title={`Welcome ${this.state.name}`}/>
           <Content>
               <Card transparent>
                 <CardItem style={{backgroundColor:'#F8F8F8',height:heightPercentageToDP('90%')}}>
@@ -51,7 +61,7 @@ class HomeScreenIndex extends Component {
                                 <Col size={100} style={{backgroundColor:'#339966'}}>
                                    <View style={{flex:1, flexDirection:'column',alignItems:'center'}}>
                                      <Thumbnail style={{width:60, height:60,margin:5}} source={{uri:'https://s.gravatar.com/avatar/6ce574b021fa96559bf2b1a4ed3e5d3b?s=80'}}/>
-                                     <Text style={material.captionWhite}>Usman Nnamdi</Text>
+                                     <Text style={material.captionWhite}>{this.state.name}</Text>
                                      <Star score={4.7} style={{height:20,width:80}} />
                                    </View>
                                 </Col>
@@ -62,7 +72,9 @@ class HomeScreenIndex extends Component {
                                      </View>
                                      <View style={{flex:1}}>
                                      <Item >
-                                       <Input  placeholder='15,000'/>
+                                       <Input 
+                                       onChangeText={(text)=>this.setState({})}
+                                       placeholder='0.00'/>
                                      </Item>
                                    </View>
                                 </Col>
@@ -87,9 +99,12 @@ HomeScreenIndex.propType={
 }
 
 const MapStateToProps=(state)=>({
+  data:state.auth,
   
 })
 HomeScreenIndex.propTypes={
-  currentRoute:PropTypes.func.isRequired
+ // getProfile:PropTypes.func.isRequired,
+  data:PropTypes.object.isRequired
+ // currentRoute:PropTypes.func.isRequired
 }
-export default connect(MapStateToProps,{currentRoute})(HomeScreenIndex)
+export default connect(MapStateToProps,{})(HomeScreenIndex)

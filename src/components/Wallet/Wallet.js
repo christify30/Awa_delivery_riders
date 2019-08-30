@@ -4,7 +4,7 @@ import {Container,Content, Card,CardItem, Left, Body,Tab,Tabs,Grid, Row,Col, Rig
 import Header from '../../container/header/Header';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {currentRoute} from '../../redux/actions/routesAction';
+//import {currentRoute} from '../../redux/actions/routesAction';
 import {material,human} from 'react-native-typography';
 import Star from 'react-native-star-view';
 import {WalletCard} from '../commonComponents/CommonCards';
@@ -26,13 +26,18 @@ walletData.map(data=>{
     totalMoney=parseFloat(data.amount)+parseFloat(totalMoney)
 })
 class Wallet extends Component {
-    static navigationOptions = ({ navigation }) => ({
-        drawerLockMode :'unlocked'
-      });
-    
-      componentDidMount() {
-          this.props.currentRoute('Wallet')
+
+      state={
+          name:''
       }
+    componentDidMount(){
+      const {firstname,lastname}=this.props.data.profile.data;
+      this.setState((state)=>{
+          return{
+              name:`${firstname} ${lastname}`}
+              })
+            }
+            
     render() {
         const uri = "https://s.gravatar.com/avatar/6ce574b021fa96559bf2b1a4ed3e5d3b?s=80";
         const uri2="asset:/image/Card.png";
@@ -46,7 +51,7 @@ class Wallet extends Component {
                     </View>
                     <View style={{flex:1,flexDirection:'column',justifyContent:'center',alignItems:'flex-end',paddingRight:20}}>
                     <Thumbnail circle style={{width:50,height:50,borderRadius:50}} source={{uri: uri}} />
-                        <Text>Usman Nnamdi</Text>
+                        <Text>{this.state.name}</Text>
                         <Star score={4.7} style={styles.starStyle} />
                     </View>
                 </View>
@@ -167,9 +172,10 @@ const styles=StyleSheet.create({
   },
 });
 const mapStateToProps=(state)=>({
-
+data:state.auth
 });
 Wallet.propTypes={
-    currentRoute:PropTypes.func.isRequired
+    //currentRoute:PropTypes.func.isRequired,
+    data:PropTypes.object.isRequired
 }
-export default connect(mapStateToProps,{currentRoute})(Wallet)
+export default connect(mapStateToProps,{})(Wallet)

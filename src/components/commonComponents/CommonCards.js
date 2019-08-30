@@ -1,9 +1,9 @@
 import React from 'react';
 import { CardItem,Grid,Row,Col, Card,Thumbnail, Button } from 'native-base';
 import {material} from 'react-native-typography';
-import {Text,View,StyleSheet,Image} from 'react-native';
+import {Text,View,StyleSheet,Image,Switch} from 'react-native';
 import {heightPercentageToDP,widthPercentageToDP} from '../../PixelRatio/pixelRatio';
-import {Switch} from 'react-native-base-switch';
+//import {Switch} from 'react-native-base-switch';
 import Star from 'react-native-star-view';
 
 
@@ -52,12 +52,13 @@ export const HistoryCard=(props)=>
           <Text>{props.title}</Text>
           </View>
           <View style={{flex:1, alignItems:'flex-end'}}>
-          <Switch onChangeState={props.onChangeState}
+         {/* <Switch onChangeState={props.onChangeState}
                   activeBackgroundColor='#339966a6'
                   inactiveBackgroundColor='#33996648'
                   activeButtonColor='#339966'
                   inactiveButtonColor='#339966d5'
-             />
+             />*/}
+               <Switch value={true} onValueChange={props.onChangeState}/>
          </View>
       </View>
    </CardItem>

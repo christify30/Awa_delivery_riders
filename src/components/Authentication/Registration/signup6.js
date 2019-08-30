@@ -25,7 +25,7 @@ import {human, material } from 'react-native-typography';
             nextForm:'Signup7'
           }
         return (
-            <RegisterTheme parentProperty={this.props} nextPage={item}>
+            <RegisterTheme handleClick={()=>this.props.navigation.navigate(item.nextForm)} parentProperty={this.props} nextPage={item}>
                 <Wrapper>
                   <View style={{flex:1,height:300,alignItems:'center' ,justifyContent:'center'}}>
                     <View style={{marginBottom:10}}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Header,CardItem,Form,Item,Input,Body} from 'native-base';
-import {View,Text,StyleSheet} from 'react-native'
+import {View,Text,StyleSheet,Alert} from 'react-native'
 import Wrapper from './Wrapper';
 import RegisterTheme from './index';
 //import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -64,6 +64,7 @@ let registeringText = "Submiting your Data\nPlease Wait...";
            const passwordPattern= ".{6,}"
            const phonePattern =".{9,}"
            error=false;
+           this.setState({serverErrors:{status:false,message:''}});
            if(!this.state.email.match(emailPattern)){
             
             error=true;   
@@ -129,7 +130,7 @@ let registeringText = "Submiting your Data\nPlease Wait...";
                         <Form style={{width:'100%'}}>
                             <Item error={emailError.status} >
                                 <Input onChangeText={(text)=>this.setState({email:text})} style={human.subHead} placeholder='Email'
-                                 onFocus={()=>this.setState({emailError:{status:false,message:''}})}
+                                 onFocus={()=>this.setState({serverErrors:{status:false,message:''},emailError:{status:false,message:''}})}
                                 />
 
                             </Item>
@@ -139,7 +140,7 @@ let registeringText = "Submiting your Data\nPlease Wait...";
                                 <Input onChangeText={(text)=>this.setState({phone:text})} style={human.subHead} 
                                 keyboardType={'numeric'}
                                 placeholder='Phone Number'
-                                 onFocus={()=>this.setState({phoneError:{status:false,message:''}})}
+                                 onFocus={()=>this.setState({serverErrors:{status:false,message:''},phoneError:{status:false,message:''}})}
                                 />
                             </Item>
                             {phoneError.status ? <Text  style={styles.errorText}>{phoneError.message}</Text>:<Text></Text>}
@@ -147,17 +148,16 @@ let registeringText = "Submiting your Data\nPlease Wait...";
                                 <Input
                                 secureTextEntry={true}
                                 onChangeText={(text)=>this.setState({password:text})} style={human.subHead} placeholder='password'
-                                onFocus={()=>this.setState({passwordError:{status:false,message:''}})}
+                                onFocus={()=>this.setState({serverErrors:{status:false,message:''},passwordError:{status:false,message:''}})}
                                 />    
                             </Item>
                             {passwordError.status ? <Text style={styles.errorText}>{passwordError.message}</Text>:Empty}
                         </Form>
                     </CardItem>
                     {this.state.serverErrors.status ?
-                    <CardItem>
-                        <Text style={{color:'red'}}>{this.state.serverErrors.message}
-                        </Text>
-                    </CardItem> 
+                   
+                        alert(this.state.serverErrors.message)
+                    
                        :Empty}
                    {/*<View style={{flex:1,margin:20, flexDirection:'row',justifyContent:'center'}}>
                         <View style={{flex:1, flexDirection:'row', justifyContent:'flex-start',alignItems:'flex-start'}}>

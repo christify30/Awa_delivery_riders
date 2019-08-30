@@ -4,7 +4,7 @@ import {Container,Content,Card,CardItem} from 'native-base';
 import Header from '../../container/header/Header';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {currentRoute} from '../../redux/actions/routesAction';
+//import {currentRoute} from '../../redux/actions/routesAction';
 import Star from 'react-native-star-view';
 import {heightPercentageToDP,widthPercentageToDP}from '../../PixelRatio/pixelRatio';
 import {material} from 'react-native-typography';
@@ -29,12 +29,9 @@ const ratingData=[
 ]
 
 class YourRating extends Component {
-    static navigationOptions = ({ navigation }) => ({
-        drawerLockMode :'unlocked'
-      });
-    
+ 
       componentDidMount() {
-          this.props.currentRoute('Your Rating')
+         // this.props.currentRoute('Your Rating')
       }
     render() {
         return (
@@ -82,6 +79,6 @@ const mapStateToProps=(state)=>({
 
 });
 YourRating.propTypes={
-    currentRoute:PropTypes.func.isRequired
+    //currentRoute:PropTypes.func.isRequired
 }
-export default connect(mapStateToProps,{currentRoute})(YourRating)
+export default connect(mapStateToProps,{})(YourRating)

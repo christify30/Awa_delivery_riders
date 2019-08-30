@@ -9,7 +9,7 @@ const {height} =Dimensions.get('window');
  class onboardingScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
         header: (
-            <Header style={{display:'none'}} androidStatusBarColor="#F8F8F8">
+            <Header style={{display:'none'}} androidStatusBarColor="#339966">
             </Header>
         ),
         drawerLockMode:'locked-closed'

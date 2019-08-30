@@ -4,17 +4,15 @@ import {Container,Content, Left, Body, Right, CardItem, Card, Button} from 'nati
 import Header from '../../container/header/Header';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {currentRoute} from '../../redux/actions/routesAction';
+//import {currentRoute} from '../../redux/actions/routesAction';
 import {heightPercentageToDP,widthPercentageToDP} from '../../PixelRatio/pixelRatio';
 import {material} from 'react-native-typography';
 
 class ShareApp extends Component {
-    static navigationOptions = ({ navigation }) => ({
-        drawerLockMode :'unlocked'
-      });
+
     
       componentDidMount() {
-          this.props.currentRoute('Share App')
+         // this.props.currentRoute('Share App')
       }
     render() {
         return (
@@ -53,6 +51,6 @@ const mapStateToProps=(state)=>({
 
 });
 ShareApp.propTypes={
-    currentRoute:PropTypes.func.isRequired
+    //currentRoute:PropTypes.func.isRequired
 }
-export default connect(mapStateToProps,{currentRoute})(ShareApp)
+export default connect(mapStateToProps,{})(ShareApp)

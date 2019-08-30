@@ -4,23 +4,24 @@ import {View,TouchableOpacity,StyleSheet, Dimensions} from 'react-native';
 //import {test} from '../../../redux/actions/homeAction';
 import {connect} from 'react-redux';
 import {material} from 'react-native-typography';
-import {login} from '../../../redux/actions/Authentication/auth';
+import {login,getProfile} from '../../../redux/actions/Authentication/auth';
 import Wrapper from '../../Wrapper';
 import Spinner from '../../Spinner';
 import Empty from '../../Empty';
 import route from './routeTohit';
+//import {getProfile} from '../../redux/actions/Authentication/auth';
 
 import PropTypes from 'prop-types';
 
 const {height} = Dimensions.get('window');
 
 let error = false;
-let registeringText = 'Signing you in...'
+let registeringText = 'Signing you in...';
  class Login extends Component {
 
   static navigationOptions = ({ navigation }) => ({
         header: (
-            <Header style={{display:'none'}} androidStatusBarColor="#F8F8F8">
+            <Header style={{display:'none'}} androidStatusBarColor="#339966">
             </Header>
         )
       });
@@ -42,9 +43,6 @@ let registeringText = 'Signing you in...'
         error:false
       }
 
-     componentWillMount(){
-         
-     }
 
      componentWillReceiveProps(nextProps){
 //this.props.navigation.navigate('HomeIndex')
@@ -54,10 +52,11 @@ let registeringText = 'Signing you in...'
             if(user){
            
             setTimeout(()=>{
+               this.setState({loading:false,serverErrors:{status:false,message:''}})
                route(this.props.navigation,User)
                 //this.props.navigation.navigate('HomeIndex');
-            this.setState({loading:false,serverErrors:{status:false,message:''}})
-            },4000)
+            
+            },500)
             }else{
                 this.setState({loading:false,serverErrors:{status:true,message:error}});
                
@@ -101,7 +100,9 @@ let registeringText = 'Signing you in...'
         }
         return
     }
-
+componentWillUnmount(){
+  //this.abortController.abort();
+}
 
     render() {
         const {emailError,passwordError} =  this.state; 
@@ -133,6 +134,7 @@ let registeringText = 'Signing you in...'
                             <Item error={emailError.status}>
                                 <Icon style={material.body1} active name='person' />
                                 <Input
+                                keyboardType='email-address'
                                 onFocus={()=>this.setState({emailError:{status:false,message:''}})}
                                 onChangeText={(text)=>this.setState({email:text})} style={material.body1} placeholder='Email'/>
                             </Item>
@@ -208,10 +210,11 @@ const styles=StyleSheet.create({
 Login.propTypes={
 login:PropTypes.func.isRequired,
 data:PropTypes.object.isRequired,
+getProfile:PropTypes.func.isRequired
 }
 
 const mapStateToProps=(state)=>({
 data:state
 })
 
-export default connect(mapStateToProps,{login})(Login);
+export default connect(mapStateToProps,{login,getProfile})(Login);

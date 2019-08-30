@@ -1,7 +1,6 @@
 import React from "react";
 import HomeScreen from "../components/HomeScreen/HomeScreen";
 import SideBar from "../components/SideBar/SideBar";
-import WelcomeScreen from "./welcomeRoutes"
 import HomeIndex from '../components/HomeScreen/index';
 import Payment from '../components/Payment/Payment';
 import Wallet from '../components/Wallet/Wallet';
@@ -16,7 +15,7 @@ import { createAppContainer ,createDrawerNavigator} from "react-navigation";
 
 const AppNavigator = createDrawerNavigator({
   
-    WelcomeScreen:{screen:WelcomeScreen},
+    //WelcomeScreen:{screen:WelcomeScreen},
     HomeIndex:{screen:HomeIndex},
     Home:HomeScreen,
     Wallet:{screen:Wallet},
@@ -29,8 +28,8 @@ const AppNavigator = createDrawerNavigator({
     About:About
   },
   {
-   contentComponent: props => <SideBar {...props} />,
-   drawerLockMode :'locked-closed'
+   contentComponent: props => <SideBar {...props} />
+   //drawerLockMode :'locked-closed'
    }
 );
 

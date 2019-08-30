@@ -5,7 +5,7 @@ import Header from '../../container/header/Header';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {HistoryCard} from '../commonComponents/CommonCards'
-import {currentRoute} from '../../redux/actions/routesAction';
+//import {currentRoute} from '../../redux/actions/routesAction';
 import {material,human} from 'react-native-typography';
 import {walletData} from './walletdata'
 let i=0;
@@ -15,12 +15,10 @@ walletData.map(data=>{
     totalMoney=parseFloat(data.amount)+parseFloat(totalMoney)
 })
 class BookingHistory extends Component {
-    static navigationOptions = ({ navigation }) => ({
-        drawerLockMode :'unlocked'
-      });
+   
     
       componentDidMount() {
-          this.props.currentRoute('Booking History')
+         // this.props.currentRoute('Booking History')
       }
     render() {
         return (
@@ -101,6 +99,6 @@ const mapStateToProps=(state)=>({
 
 });
 BookingHistory.propTypes={
-    currentRoute:PropTypes.func.isRequired
+   // currentRoute:PropTypes.func.isRequired
 }
-export default connect(mapStateToProps,{currentRoute})(BookingHistory)
+export default connect(mapStateToProps,{})(BookingHistory)

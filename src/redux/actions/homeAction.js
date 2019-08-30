@@ -1,4 +1,8 @@
 import {TEST_REDUCER,GET_CURRENT_LOCATION} from './types'
+import axios from 'axios';
+
+const BASE_URL = "http://134.209.24.106/";
+
 export const getName=()=>dispatch=>{
    dispatch({
        type:TEST_REDUCER,
@@ -20,4 +24,11 @@ export  const getCurrentPosition =() => dispatch => {
          });
      },err=>{console.log(err)});
 
+}
+
+export const riderStatus=(coordinates)=>dispatch=>{
+    axios.post(`${BASE_URL}v1/rider/rider-status`,coordinates)
+    .then(res=>{
+        
+    })
 }

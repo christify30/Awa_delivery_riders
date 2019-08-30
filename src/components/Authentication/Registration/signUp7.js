@@ -23,10 +23,10 @@ import { heightPercentageToDP } from '../../../PixelRatio/pixelRatio';
             buttonText:'Finish',
             progress:6,
             buttonColor:'#339966',
-            nextForm:'HomeIndex'
+            nextForm:'LoadScreen'
           }
         return (
-            <RegisterTheme parentProperty={this.props} nextPage={item}>
+            <RegisterTheme handleClick={()=>this.props.navigation.navigate(item.nextForm)}  parentProperty={this.props} nextPage={item}>
                 <Wrapper>
                   <View style={{flex:1,height:heightPercentageToDP('40%'),alignItems:'center' ,justifyContent:'center'}}>
                     <View >

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {Container,Header,Content ,View,Text,Button ,Grid,Row} from 'native-base';
 import {StyleSheet,Image,TouchableOpacity} from 'react-native';
-import {Actions} from 'react-native-router-flux';
+//import {Actions} from 'react-native-router-flux';
 
  class WelcomeScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
         header: (
-            <Header style={{display:'none'}} androidStatusBarColor="#F8F8F8">
+            <Header style={{display:'none'}} androidStatusBarColor="#339966">
             </Header>
         )
       });

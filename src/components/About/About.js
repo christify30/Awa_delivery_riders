@@ -4,16 +4,14 @@ import {Container,Content, Left, Body, Right, Footer, FooterTab, Button} from 'n
 import Header from '../../container/header/Header';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {currentRoute} from '../../redux/actions/routesAction';
+//import {currentRoute} from '../../redux/actions/routesAction';
 import {material} from 'react-native-typography';
 
 class About extends Component {
-    static navigationOptions = ({ navigation }) => ({
-        drawerLockMode :'unlocked'
-      });
+   
     
       componentDidMount() {
-          this.props.currentRoute('About AWA Delivery')
+          //this.props.currentRoute('About AWA Delivery')
       }
     render() {
         return (
@@ -40,6 +38,6 @@ const mapStateToProps=(state)=>({
 
 });
 About.propTypes={
-    currentRoute:PropTypes.func.isRequired
+    //currentRoute:PropTypes.func.isRequired
 }
-export default connect(mapStateToProps,{currentRoute})(About)
+export default connect(mapStateToProps)(About)

@@ -6,7 +6,7 @@ import {material} from 'react-native-typography';
 class  NotificationScreen3 extends React.Component{
     static navigationOptions = ({ navigation }) => ({
         header: (
-            <Header style={{display:'none'}} androidStatusBarColor="#F8F8F8">
+            <Header style={{display:'none'}} androidStatusBarColor="#339966">
             </Header>
         )
       }

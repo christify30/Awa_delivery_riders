@@ -16,7 +16,7 @@ import {heightPercentageToDP} from '../../PixelRatio/pixelRatio'
                 />
                 <Button style={styles.yellowSkip} >
                 <TouchableOpacity onPress={props.onPress}>
-                <Text style={{color:'#339966'}}>skip</Text>
+                <Text style={{color:'#339966',...styles.skip}}>skip</Text>
                 </TouchableOpacity>
                 </Button>
                
@@ -49,6 +49,10 @@ const styles=StyleSheet.create({
         height:80,
         justifyContent:'center',
         alignItems:'center'
+    }, skip:{
+        marginLeft:20,
+        marginBottom:15,
+        fontWeight:"bold"
     },
     swiptButton:{
       backgroundColor:'#F8F8F8',
